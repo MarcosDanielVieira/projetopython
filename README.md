@@ -5,7 +5,7 @@
 
 # Criar um ambiente virtual (recomendado):
  - python -m venv venv
- - .\venv\Scripts\Activate.ps1
+ - .\venv\Scripts\Activate.ps1 (Entrar no ambiente virtual)
 
 # Instalar Django:
  - pip install django
@@ -21,6 +21,9 @@
   - Colocar o nome do app em settings.py no array INSTALLED_APPS
   - Criar uma rota em urls.py no array urlpatterns
   - Criar uma pasta templates e cria os html
+
+# Local dos arquivos ( img, js, css )
+  - Em settings.py no array STATICFILES_DIRS coloca o nome dos arquivos
 
 # Comandos opcionais
  - django-admin --version
