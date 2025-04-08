@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Pessoa
 
 
 def ver_produto(request):
@@ -7,4 +8,11 @@ def ver_produto(request):
 
 
 def comprar_produto(request):
-    return HttpResponse("Fui chamado")
+    nome = request.POST.get("nomeCompleto")
+    idade = request.POST.get("idade")
+
+    pessoa = Pessoa(nome=nome, idade=idade)
+
+    pessoa.save()
+
+    return HttpResponse("Dados cadastrados com sucesso!")
