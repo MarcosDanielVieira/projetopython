@@ -47,6 +47,15 @@
 
 - Em settings.py no array STATICFILES_DIRS coloca o nome dos arquivos
 
+# Configurando o admin
+
+- No app que criou (produtos, home, perfil, etc), deve-se registrar
+  - @admin.register(Brand)
+    - class BrandAdmin(admin.ModelAdmin):
+      - list_display = ("name", "is_active", "description", "created_at", "updated_at")
+      - search_fields = ("name",)
+      - list_filter = ("is_active",)
+
 # Comandos opcionais
 
 - django-admin --version

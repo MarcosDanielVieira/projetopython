@@ -16,7 +16,7 @@ class Brand(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
 
     # Armazena a data/hora da última atualização do registro. É atualizado automaticamente a cada modificação.
-    update_at = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
 
     # Classe interna usada para definir configurações adicionais do modelo
     class Meta:
@@ -45,7 +45,7 @@ class Category(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
 
     # Armazena a data/hora da última atualização do registro. É atualizado automaticamente a cada modificação.
-    update_at = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
 
     # Classe interna usada para definir configurações adicionais do modelo
     class Meta:
@@ -97,7 +97,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
 
     # Armazena a data/hora da última atualização do registro. É atualizado automaticamente a cada modificação.
-    update_at = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
 
     # Classe interna usada para definir configurações adicionais do modelo
     class Meta:
