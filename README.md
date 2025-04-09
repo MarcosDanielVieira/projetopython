@@ -20,17 +20,6 @@
   - ou
 - django-admin startproject core .
 
-# Rodar o servidor local
-
-- python manage.py runserver
-
-# Criar um app
-
-- python manage.py startapp meu_app (produtos, home, perfil, etc)
-- Colocar o nome do app em settings.py no array INSTALLED_APPS
-- Criar uma rota em urls.py no array urlpatterns
-- Criar uma pasta templates e cria os html
-
 # Criar uma migration
 
 - python manage.py makemigrations
@@ -42,6 +31,17 @@
   - nome_usuario
   - email_usuario
   - senha_usuario
+
+# Rodar o servidor local
+
+- python manage.py runserver
+
+# Criar um app
+
+- python manage.py startapp meu_app (produtos, home, perfil, etc)
+- Colocar o nome do app em settings.py no array INSTALLED_APPS
+- Criar uma rota em urls.py no array urlpatterns
+- Criar uma pasta templates e cria os html
 
 # Local dos arquivos ( img, js, css )
 
