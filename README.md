@@ -20,17 +20,6 @@
   - ou
 - django-admin startproject core .
 
-# Rodar o servidor local
-
-- python manage.py runserver
-
-# Criar um app
-
-- python manage.py startapp meu_app (produtos, home, perfil, etc)
-- Colocar o nome do app em settings.py no array INSTALLED_APPS
-- Criar uma rota em urls.py no array urlpatterns
-- Criar uma pasta templates e cria os html
-
 # Criar uma migration
 
 - python manage.py makemigrations
@@ -43,9 +32,29 @@
   - email_usuario
   - senha_usuario
 
+# Rodar o servidor local
+
+- python manage.py runserver
+
+# Criar um app
+
+- python manage.py startapp meu_app (produtos, home, perfil, etc)
+- Colocar o nome do app em settings.py no array INSTALLED_APPS
+- Criar uma rota em urls.py no array urlpatterns
+- Criar uma pasta templates e cria os html
+
 # Local dos arquivos ( img, js, css )
 
 - Em settings.py no array STATICFILES_DIRS coloca o nome dos arquivos
+
+# Configurando o admin
+
+- No app que criou (produtos, home, perfil, etc), deve-se registrar
+  - @admin.register(Brand)
+    - class BrandAdmin(admin.ModelAdmin):
+      - list_display = ("name", "is_active", "description", "created_at", "updated_at")
+      - search_fields = ("name",)
+      - list_filter = ("is_active",)
 
 # Comandos opcionais
 
