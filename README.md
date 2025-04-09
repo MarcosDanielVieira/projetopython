@@ -4,10 +4,11 @@
 - View (Arquivo responsável pela lógica da aplicação)
 - Templates (Arquivo responsável de mostrar o resultado para o usuário)
 
-# Criar um ambiente virtual (recomendado):
+# Criar um ambiente virtual:
 
 - python -m venv venv
-- .\venv\Scripts\Activate.ps1 (Entrar no ambiente virtual)
+- .\venv\Scripts\Activate.ps1
+  - Entrar no ambiente virtual
 
 # Instalar Django:
 
@@ -15,7 +16,9 @@
 
 # Criar o projeto
 
-- django-admin startproject nome_projeto .
+- django-admin startproject app .
+  - ou
+- django-admin startproject core .
 
 # Rodar o servidor local
 
