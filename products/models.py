@@ -25,6 +25,7 @@ class Brand(models.Model):
 
         # Define um nome legível (singular) para o modelo na interface administrativa do Django
         verbose_name = "Marca"
+        verbose_name_plural = "Marca"
 
     # Método especial que define como a instância do modelo será representada como string (por exemplo, no admin)
     def __str__(self):
@@ -54,6 +55,7 @@ class Category(models.Model):
 
         # Define um nome legível (singular) para o modelo na interface administrativa do Django
         verbose_name = "Categoria"
+        verbose_name_plural = "Categorias"
 
     # Método especial que define como a instância do modelo será representada como string (por exemplo, no admin)
     def __str__(self):
@@ -106,6 +108,7 @@ class Product(models.Model):
 
         # Define um nome legível (singular) para o modelo na interface administrativa do Django
         verbose_name = "Produto"
+        verbose_name_plural = "Produtos"
 
     # Método especial que define como a instância do modelo será representada como string (por exemplo, no admin)
     def __str__(self):
