@@ -3,9 +3,13 @@ from django.contrib import admin
 from django.http import HttpResponse
 
 # Importa os modelos que serão registrados no Django Admin
-from .models import Brand, Category, Product
-
+from .models import Brand, Category, Product, ProductImage
 import csv
+
+
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 0
 
 
 # Registra o modelo Brand no Django Admin usando um decorator
@@ -30,6 +34,7 @@ class CategoryAdmin(admin.ModelAdmin):
 # Registra o modelo Product no Django Admin
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    inlines = [ProductImageInline]
     list_display = (
         "title",  # Título do produto
         "brand",  # Marca relacionada
