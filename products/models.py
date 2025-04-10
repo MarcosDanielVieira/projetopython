@@ -122,7 +122,7 @@ class ProductImage(models.Model):
     )
 
     def __str__(self):
-        return str(self.product.id)
+        return str(self.product.title)
 
     class Meta:
         verbose_name = "Imagens do produto"
