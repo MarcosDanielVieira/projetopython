@@ -25,7 +25,7 @@ class Brand(models.Model):
 
         # Define um nome legível (singular) para o modelo na interface administrativa do Django
         verbose_name = "Marca"
-        verbose_name_plural = "Marca"
+        verbose_name_plural = "Marcas"
 
     # Método especial que define como a instância do modelo será representada como string (por exemplo, no admin)
     def __str__(self):
@@ -116,7 +116,7 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
-    image = models.ImageField("Images", upload_to="images")
+    image = models.ImageField("Imagens", upload_to="images")
     product = models.ForeignKey(
         Product, related_name="product_images", on_delete=models.CASCADE
     )
