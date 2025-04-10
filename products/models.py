@@ -121,6 +121,7 @@ class ProductImage(models.Model):
         Product, related_name="product_images", on_delete=models.CASCADE
     )
 
+    # Retorno após a ação ( registra no log )
     def __str__(self):
         return str(self.product.title)
 
