@@ -39,10 +39,11 @@ class ProductAdmin(admin.ModelAdmin):
         "created_at",  # Data de criação
         "updated_at",  # Data de atualização
     )
-    # Define os campos de busca (atenção: "brand_name" e "category_name" precisam existir ou devem ser corrigidos)
-    search_fields = ("title", "brand_name", "category_name")
+    # Define os campos de busca (atenção: "brand__name" e "category__name" precisam existir ou devem ser corrigidos)
+    search_fields = ("title", "brand__name", "category__name")
     # Adiciona filtros laterais com base nesses campos
     list_filter = ("is_active", "brand", "category")
+    autocomplete_fields = ["brand", "category"]
 
     def export_to_csv(self, request, queryset):
         response = HttpResponse(content_type="text/csv")
