@@ -1,8 +1,11 @@
 # Importa o módulo admin do Django para customizar a interface administrativa
 from django.contrib import admin
+from django.http import HttpResponse
 
 # Importa os modelos que serão registrados no Django Admin
 from .models import Brand, Category, Product
+
+import csv
 
 
 # Registra o modelo Brand no Django Admin usando um decorator
@@ -40,3 +43,38 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ("title", "brand_name", "category_name")
     # Adiciona filtros laterais com base nesses campos
     list_filter = ("is_active", "brand", "category")
+
+    def export_to_csv(self, request, queryset):
+        response = HttpResponse(content_type="text/csv")
+        response["Content-Disposition"] = 'attachment; filename="products.csv"'
+        writer = csv.writer(response)
+        writer.writerow(
+            [
+                "titulo",
+                "marca",
+                "categoria",
+                "preço",
+                "ativo",
+                "descrição",
+                "criado em",
+                "atualizado em",
+            ]
+        )
+        for product in queryset:
+            writer.writerow(
+                [
+                    product.title,
+                    product.brand.name,
+                    product.category.name,
+                    product.price,
+                    product.is_active,
+                    product.description,
+                    product.created_at,
+                    product.updated_at,
+                ]
+            )
+
+        return response
+
+    export_to_csv.short_description = "Exportar para CSV"
+    actions = [export_to_csv]
