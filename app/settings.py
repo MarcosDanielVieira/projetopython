@@ -171,14 +171,14 @@ JAZZMIN_SETTINGS = {
     # Menu do Usuário #
     #############
     # Links adicionais para incluir no menu do usuário no canto superior direito (tipo de URL "app" não é permitido)
-    "usermenu_links": [
-        {
-            "name": "Suporte",
-            "url": "https://github.com/farridav/django-jazzmin/issues",
-            "new_window": True,
-        },
-        {"model": "auth.user"},
-    ],
+    # "usermenu_links": [
+    #     {
+    #         "name": "Suporte",
+    #         "url": "https://github.com/farridav/django-jazzmin/issues",
+    #         "new_window": True,
+    #     },
+    #     {"model": "auth.user"},
+    # ],
     #############
     # Menu Lateral #
     #############
