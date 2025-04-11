@@ -58,7 +58,7 @@ class BrandAdmin(admin.ModelAdmin):
     # Habilita o campo "name" como campo de busca
     search_fields = ("name",)
     # Adiciona filtros laterais baseados no campo "is_active"
-    list_filter = ("is_active",)
+    list_filter = (ActiveFilter,)
 
 
 # Registra o modelo Category no Django Admin com suas configurações específicas
@@ -66,7 +66,7 @@ class BrandAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name", "is_active", "description", "created_at", "updated_at")
     search_fields = ("name",)
-    list_filter = ("is_active",)
+    list_filter = (ActiveFilter,)
 
 
 @admin.action(description="Ativar produtos selecionados")
@@ -84,6 +84,7 @@ def disable_product(self, request, queryset):
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline]
     form = ProductForm
+    # change_list_template = "searchbar.html"
     list_display = (
         "title",  # Título do produto
         "brand",  # Marca relacionada

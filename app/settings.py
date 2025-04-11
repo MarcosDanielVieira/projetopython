@@ -230,7 +230,7 @@ JAZZMIN_SETTINGS = {
     # Ajustes de UI #
     #############
     # Caminhos relativos para scripts CSS/JS personalizados (devem estar presentes nos arquivos estáticos)
-    "custom_css": None,
+    "custom_css": "css/admin.css",
     "custom_js": None,
     # Se deve linkar a fonte de fonts.googleapis.com (use custom_css para fornecer a fonte caso contrário)
     "use_google_fonts_cdn": True,
