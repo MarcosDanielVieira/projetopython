@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "jazzmin",
+    "ckeditor",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -58,7 +59,7 @@ ROOT_URLCONF = "app.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "base", "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -229,7 +230,7 @@ JAZZMIN_SETTINGS = {
     # Ajustes de UI #
     #############
     # Caminhos relativos para scripts CSS/JS personalizados (devem estar presentes nos arquivos estáticos)
-    "custom_css": None,
+    "custom_css": "css/admin.css",
     "custom_js": None,
     # Se deve linkar a fonte de fonts.googleapis.com (use custom_css para fornecer a fonte caso contrário)
     "use_google_fonts_cdn": True,
@@ -261,29 +262,48 @@ JAZZMIN_UI_TWEAKS = {
     "body_small_text": False,
     "brand_small_text": False,
     "brand_colour": "navbar-info",
-    "accent": "accent-info",
-    "navbar": "navbar-cyan navbar-dark",
+    "accent": "accent-primary",
+    "navbar": "navbar-info navbar-dark",
     "no_navbar_border": False,
     "navbar_fixed": True,
     "layout_boxed": False,
     "footer_fixed": False,
     "sidebar_fixed": True,
-    "sidebar": "sidebar-dark-success",
+    "sidebar": "sidebar-dark-info",
     "sidebar_nav_small_text": False,
     "sidebar_disable_expand": False,
     "sidebar_nav_child_indent": True,
     "sidebar_nav_compact_style": True,
-    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_legacy_style": True,
     "sidebar_nav_flat_style": True,
-    "theme": "default",
+    "theme": "yeti",
     "dark_mode_theme": None,
     "button_classes": {
-        "primary": "btn-primary",
-        "secondary": "btn-secondary",
-        "info": "btn-info",
-        "warning": "btn-warning",
-        "danger": "btn-danger",
-        "success": "btn-success",
+        "primary": "btn-outline-primary",
+        "secondary": "btn-outline-secondary",
+        "info": "btn-outline-info",
+        "warning": "btn-outline-warning",
+        "danger": "btn-outline-danger",
+        "success": "btn-outline-success",
     },
     "actions_sticky_top": True,
+}
+
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": "Custom",
+        "toolbar_Custom": [
+            ["Bold", "Italic", "Underline", "Strike"],
+            ["NumberedList", "BulletedList"],
+            ["Link", "Unlink"],
+            ["RemoveFormat", "Source"],
+        ],
+        "removePlugins": "image,uploadimage",
+        "height": 300,
+        "width": "100%",
+        "extraPlugins": "placeholder",
+        "title": "Digite aqui o conteúdo...",
+    }
 }
