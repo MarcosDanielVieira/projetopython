@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "jazzmin",
+    "ckeditor",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -286,4 +287,23 @@ JAZZMIN_UI_TWEAKS = {
         "success": "btn-success",
     },
     "actions_sticky_top": True,
+}
+
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": "Custom",
+        "toolbar_Custom": [
+            ["Bold", "Italic", "Underline", "Strike"],
+            ["NumberedList", "BulletedList"],
+            ["Link", "Unlink"],
+            ["RemoveFormat", "Source"],
+        ],
+        "removePlugins": "image,uploadimage",
+        "height": 300,
+        "width": "100%",
+        "extraPlugins": "placeholder",
+        "title": "Digite aqui o conteúdo...",
+    }
 }

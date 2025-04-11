@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 # Importa a classe base 'models' do Django, usada para definir modelos que serão traduzidos para tabelas no banco de dados.
@@ -10,7 +11,7 @@ class Brand(models.Model):
     is_active = models.BooleanField(default=True, verbose_name="Ativo")
 
     # Campo de texto mais longo (sem limite definido). Pode ser nulo (null=True) e opcional no formulário (blank=True).
-    description = models.TextField(null=True, blank=True, verbose_name="Descrição")
+    description = RichTextField(null=True, blank=True, verbose_name="Descrição")
 
     # Armazena a data/hora de criação do registro. É preenchido automaticamente no momento da criação.
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
@@ -40,7 +41,7 @@ class Category(models.Model):
     is_active = models.BooleanField(default=True, verbose_name="Ativo")
 
     # Campo de texto mais longo (sem limite definido). Pode ser nulo (null=True) e opcional no formulário (blank=True).
-    description = models.TextField(null=True, blank=True, verbose_name="Descrição")
+    description = RichTextField(null=True, blank=True, verbose_name="Descrição")
 
     # Armazena a data/hora de criação do registro. É preenchido automaticamente no momento da criação.
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
@@ -93,7 +94,7 @@ class Product(models.Model):
     is_active = models.BooleanField(default=True, verbose_name="Ativo")
 
     # Campo de texto mais longo (sem limite definido). Pode ser nulo (null=True) e opcional no formulário (blank=True).
-    description = models.TextField(null=True, blank=True, verbose_name="Descrição")
+    description = RichTextField(null=True, blank=True, verbose_name="Descrição")
 
     # Armazena a data/hora de criação do registro. É preenchido automaticamente no momento da criação.
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")

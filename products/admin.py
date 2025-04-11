@@ -4,6 +4,7 @@ from django.http import HttpResponse
 
 # Importa os modelos que serão registrados no Django Admin
 from .models import Brand, Category, Product, ProductImage
+from .forms import ProductForm
 import csv
 
 
@@ -31,10 +32,21 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ("is_active",)
 
 
+@admin.action(description="Ativar produtos selecionados")
+def activate_product(self, request, queryset):
+    queryset.update(is_active=True)
+
+
+@admin.action(description="Desativar produtos selecionados")
+def disable_product(self, request, queryset):
+    queryset.update(is_active=False)
+
+
 # Registra o modelo Product no Django Admin
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline]
+    form = ProductForm
     list_display = (
         "title",  # Título do produto
         "brand",  # Marca relacionada
@@ -53,7 +65,7 @@ class ProductAdmin(admin.ModelAdmin):
     def export_to_csv(self, request, queryset):
         response = HttpResponse(content_type="text/csv")
         response["Content-Disposition"] = 'attachment; filename="products.csv"'
-        writer = csv.writer(response)
+        writer = csv.writer(response, delimiter=";")
         writer.writerow(
             [
                 "titulo",
@@ -70,8 +82,8 @@ class ProductAdmin(admin.ModelAdmin):
             writer.writerow(
                 [
                     product.title,
-                    product.brand.name,
-                    product.category.name,
+                    product.brand.name if product.brand else "",
+                    product.category.name if product.category else "",
                     product.price,
                     product.is_active,
                     product.description,
@@ -83,4 +95,4 @@ class ProductAdmin(admin.ModelAdmin):
         return response
 
     export_to_csv.short_description = "Exportar para CSV"
-    actions = [export_to_csv]
+    actions = [export_to_csv, activate_product, disable_product]
