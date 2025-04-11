@@ -1,6 +1,7 @@
 # Importa o módulo admin do Django para customizar a interface administrativa
 from django.contrib import admin
 from django.http import HttpResponse
+from django.utils.html import format_html
 
 # Importa os modelos que serão registrados no Django Admin
 from .models import Brand, Category, Product, ProductImage
@@ -11,6 +12,42 @@ import csv
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 0
+
+
+# Filtro personalizado para o campo is_active
+class ActiveFilter(admin.SimpleListFilter):
+    title = "Ativo"
+    parameter_name = "is_active"
+    template = "filter.html"  # Caminho relativo a base/templates
+
+    def lookups(self, request, model_admin):
+        return (
+            ("1", "Sim"),
+            ("0", "Não"),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == "1":
+            return queryset.filter(is_active=True)
+        elif self.value() == "0":
+            return queryset.filter(is_active=False)
+        return queryset
+
+
+class BrandFilter(admin.SimpleListFilter):
+    title = "Marca"
+    parameter_name = "brand"
+    template = "filter.html"  # Usa o mesmo template customizado
+
+    def lookups(self, request, model_admin):
+        # Retorna uma tupla com id e nome da marca
+        brands = Brand.objects.all()
+        return [(str(brand.id), brand.name) for brand in brands]
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(brand__id=self.value())
+        return queryset
 
 
 # Registra o modelo Brand no Django Admin usando um decorator
@@ -59,7 +96,7 @@ class ProductAdmin(admin.ModelAdmin):
     # Define os campos de busca (atenção: "brand__name" e "category__name" precisam existir ou devem ser corrigidos)
     search_fields = ("title", "brand__name", "category__name")
     # Adiciona filtros laterais com base nesses campos
-    list_filter = ("is_active", "brand", "category")
+    list_filter = (ActiveFilter, BrandFilter, "category")
     autocomplete_fields = ["brand", "category"]
 
     def export_to_csv(self, request, queryset):
