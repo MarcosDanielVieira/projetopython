@@ -84,7 +84,21 @@ def disable_product(self, request, queryset):
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline]
     form = ProductForm
-    # change_list_template = "searchbar.html"
+    fieldsets = (
+        (
+            "Geral",
+            {
+                "fields": (
+                    "title",
+                    "brand",
+                    "category",
+                    "price",
+                    "is_active",
+                    "description",
+                )
+            },
+        ),
+    )
     list_display = (
         "title",  # Título do produto
         "brand",  # Marca relacionada
