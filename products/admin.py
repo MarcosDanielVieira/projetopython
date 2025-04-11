@@ -21,10 +21,7 @@ class ActiveFilter(admin.SimpleListFilter):
     template = "filter.html"  # Caminho relativo a base/templates
 
     def lookups(self, request, model_admin):
-        return (
-            ("1", "Sim"),
-            ("0", "Não"),
-        )
+        return (("1", "Sim"), ("0", "Não"))
 
     def queryset(self, request, queryset):
         if self.value() == "1":
