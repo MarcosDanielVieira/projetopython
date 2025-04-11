@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "jazzmin",
-    "ckeditor",
+    "django_ckeditor_5",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -267,7 +267,7 @@ JAZZMIN_UI_TWEAKS = {
     "no_navbar_border": False,
     "navbar_fixed": True,
     "layout_boxed": False,
-    "footer_fixed": False,
+    "footer_fixed": True,
     "sidebar_fixed": True,
     "sidebar": "sidebar-dark-info",
     "sidebar_nav_small_text": False,
@@ -279,31 +279,29 @@ JAZZMIN_UI_TWEAKS = {
     "theme": "yeti",
     "dark_mode_theme": None,
     "button_classes": {
-        "primary": "btn-outline-primary",
-        "secondary": "btn-outline-secondary",
-        "info": "btn-outline-info",
-        "warning": "btn-outline-warning",
-        "danger": "btn-outline-danger",
-        "success": "btn-outline-success",
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success",
     },
     "actions_sticky_top": True,
 }
-
-CKEDITOR_ALLOW_NONIMAGE_FILES = False
-
-CKEDITOR_CONFIGS = {
+CKEDITOR_5_CONFIGS = {
     "default": {
-        "toolbar": "Custom",
-        "toolbar_Custom": [
-            ["Bold", "Italic", "Underline", "Strike"],
-            ["NumberedList", "BulletedList"],
-            ["Link", "Unlink"],
-            ["RemoveFormat", "Source"],
+        "toolbar": [
+            "heading",
+            "|",
+            "bold",
+            "italic",
+            "link",
+            "bulletedList",
+            "numberedList",
+            "|",
+            "undo",
+            "redo",
         ],
-        "removePlugins": "image,uploadimage",
-        "height": 300,
-        "width": "100%",
-        "extraPlugins": "placeholder",
-        "title": "Digite aqui o conteúdo...",
+        "language": "pt-br",
     }
 }
