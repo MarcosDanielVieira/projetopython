@@ -8,7 +8,7 @@
       const input = document.querySelector('#changelist-search input[name="q"]');
       if (input) {
         input.setAttribute('id', 'searchbar');
-        input.setAttribute('placeholder', 'Digite um nome...');
+        input.setAttribute('placeholder', '{{ custom_search_placeholder|escapejs }}');
         input.classList.add('form-control');
 
         const formGroup = input.closest('.form-group');
@@ -18,7 +18,7 @@
 
           const label = document.createElement('label');
           label.setAttribute('for', 'searchbar');
-          label.textContent = 'Pesquisar por nome:';
+          label.innerHTML  = 'Pesquise por <small>({{ custom_search_placeholder|escapejs }})</small> ';
           label.style.display = 'block';
 
           customWrapper.appendChild(label);
