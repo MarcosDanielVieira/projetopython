@@ -32,6 +32,19 @@
   - email_usuario
   - senha_usuario
 
+# Para tradução de mensagens
+- Rode o comando para criar os arquivos .po (se ainda não tiver):
+- limitar o comando makemessages para buscar apenas nas pastas da aplicação
+  - django-admin makemessages -l pt_BR -i venv/
+
+- No arquivo locale/pt_BR/LC_MESSAGES/django.po, adicione a tradução
+  - msgid "Choose permissions by selecting them and then select the \"Choose\" arrow button."
+  - msgstr "Escolha as permissões selecionando-as e depois clique no botão de seta \"Escolher\"."
+
+- Compile o arquivo
+  - django-admin compilemessages
+
+
 # Rodar o servidor local
 
 - python manage.py runserver
