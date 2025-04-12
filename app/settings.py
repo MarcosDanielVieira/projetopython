@@ -117,6 +117,12 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Definir os idiomas que o seu site irá suportar
+LANGUAGES = [
+    ("en", "English"),
+    ("pt-br", "Português"),
+]
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
