@@ -21,10 +21,7 @@ class ActiveFilter(admin.SimpleListFilter):
     template = "filter.html"  # Caminho relativo a base/templates
 
     def lookups(self, request, model_admin):
-        return (
-            ("1", "Sim"),
-            ("0", "Não"),
-        )
+        return (("1", "Sim"), ("0", "Não"))
 
     def queryset(self, request, queryset):
         if self.value() == "1":
@@ -84,7 +81,21 @@ def disable_product(self, request, queryset):
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline]
     form = ProductForm
-    # change_list_template = "searchbar.html"
+    fieldsets = (
+        (
+            "Geral",
+            {
+                "fields": (
+                    "title",
+                    "brand",
+                    "category",
+                    "price",
+                    "is_active",
+                    "description",
+                )
+            },
+        ),
+    )
     list_display = (
         "title",  # Título do produto
         "brand",  # Marca relacionada

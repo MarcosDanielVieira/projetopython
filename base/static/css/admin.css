@@ -10,3 +10,7 @@
 #changelist-search.form-inline label {
   justify-content: initial;
 }
+
+.ck.ck-powered-by {
+  display: none !important;
+}

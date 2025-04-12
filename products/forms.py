@@ -1,5 +1,5 @@
 from django import forms
-from ckeditor.widgets import CKEditorWidget
+from django_ckeditor_5.widgets import CKEditor5Widget
 from .models import Product
 
 
@@ -12,5 +12,5 @@ class ProductForm(forms.ModelForm):
                 attrs={"placeholder": "Digite o título do produto"}
             ),
             "price": forms.NumberInput(attrs={"placeholder": "Digite o preço"}),
-            "description": CKEditorWidget(attrs={"placeholder": "Digite a descrição"}),
+            "description": CKEditor5Widget(attrs={"placeholder": "Digite a descrição"}),
         }
