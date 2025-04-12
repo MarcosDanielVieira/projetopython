@@ -109,11 +109,19 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "pt-br"
 
+LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
+
 TIME_ZONE = "America/Sao_Paulo"
 
 USE_I18N = True
 
 USE_TZ = True
+
+# Definir os idiomas que o seu site irá suportar
+LANGUAGES = [
+    ("en", "English"),
+    ("pt-br", "Português"),
+]
 
 
 # Static files (CSS, JavaScript, Images)
