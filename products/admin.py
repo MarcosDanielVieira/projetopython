@@ -97,15 +97,15 @@ class ProductAdmin(admin.ModelAdmin):
         ),
     )
     list_display = (
+        "title",  # Título do produto
         "brand",  # Marca relacionada
-        "title",  # Título do produto (tem que ser o segundo por causa, list_editable)
         "category",  # Categoria relacionada
         "price",  # Preço do produto
         "is_active",  # Se está ativo ou não
         "created_at",  # Data de criação
         "updated_at",  # Data de atualização
     )
-    # list_editable = ("title",)
+    # list_editable = ("title",) # (não pode ser o 1° item da listagem (por ser um link))
     # Define os campos de busca (atenção: "brand__name" e "category__name" precisam existir ou devem ser corrigidos)
     search_fields = ("title", "brand__name", "category__name")
     # Adiciona filtros laterais com base nesses campos
