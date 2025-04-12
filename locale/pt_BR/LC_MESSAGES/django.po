@@ -1283,3 +1283,17 @@ msgstr ""
 #: .\venv\Lib\site-packages\django_ckeditor_5\widgets.py:43
 msgid "Check the correct settings.CKEDITOR_5_CONFIGS "
 msgstr ""
+
+msgid "(click to clear)"
+msgstr "(clique para limpar)"
+
+msgid "Choose all permissions"
+msgstr "Escolher todas as permissões"
+
+msgid "Choose permissions by selecting them and then select the 'Choose' arrow button."
+msgstr "Escolha as permissões selecionando-as e depois clique no botão de seta 'Escolher'."
+
+msgid "Remove permissions by selecting them and then select the 'Remove' arrow button."
+msgstr "Remova as permissões selecionando-as e depois clique no botão de seta 'Remover'."
+
+
