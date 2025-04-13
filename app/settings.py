@@ -28,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -266,6 +265,7 @@ JAZZMIN_SETTINGS = {
     # Adicionar um dropdown de idioma no admin
     # "language_chooser": True,
     # "show_ui_builder": True,
+    "language": "pt-br",
 }
 
 JAZZMIN_UI_TWEAKS = {
@@ -300,6 +300,7 @@ JAZZMIN_UI_TWEAKS = {
     },
     "actions_sticky_top": True,
 }
+
 CKEDITOR_5_CONFIGS = {
     "default": {
         "toolbar": [
