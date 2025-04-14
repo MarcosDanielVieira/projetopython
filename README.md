@@ -72,3 +72,4 @@
 # Comandos opcionais
 
 - django-admin --version
+- python --version
