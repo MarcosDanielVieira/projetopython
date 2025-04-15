@@ -73,3 +73,4 @@
 
 - django-admin --version
 - python --version
+- python manage.py collectstatic (Rode collectstatic no ambiente de produção (caso for subir))

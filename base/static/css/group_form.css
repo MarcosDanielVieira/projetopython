@@ -1,0 +1,46 @@
+  #id_permissions>div:nth-child(odd) {
+    background-color: #f4f4f4;
+    /* Fundo suave */
+  }
+
+  #id_permissions>div:nth-child(even) {
+    background-color: #ffffff;
+    /* Fundo branco */
+  }
+
+  #id_permissions>div {
+    padding: 10px 15px;
+    /* Padding confortável */
+    margin: 5px 0;
+    /* Espaçamento entre as opções */
+    border-radius: 8px;
+    /* Bordas arredondadas */
+    border: 1px solid #ddd;
+    /* Borda fina e suave */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    /* Efeito de transição */
+  }
+
+  #id_permissions>div:hover {
+    background-color: #e6e6e6;
+    /* Cor de fundo no hover */
+    transform: scale(1.02);
+    /* Leve aumento no hover */
+  }
+
+  #id_permissions input[type="checkbox"] {
+    margin-right: 10px;
+    /* Espaçamento entre o checkbox e o texto */
+  }
+
+  #id_permissions label {
+    font-size: 14px;
+    /* Tamanho de fonte confortável */
+    color: #333;
+    /* Cor do texto */
+  }
+
+  #id_permissions label input {
+    margin-right: 8px;
+    /* Espaçamento entre o checkbox e o texto */
+  }

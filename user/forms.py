@@ -1,6 +1,7 @@
 # user/forms.py
 from django import forms
 from django.contrib.auth.models import Group, Permission
+from django.contrib.admin.widgets import FilteredSelectMultiple
 
 
 class GroupChangeForm(forms.ModelForm):
@@ -15,3 +16,11 @@ class GroupChangeForm(forms.ModelForm):
     class Meta:
         model = Group
         fields = ("name", "permissions")
+        widgets = {
+            "permissions": FilteredSelectMultiple("Permissões", is_stacked=False),
+        }
+
+    class Media:
+        css = {
+            "all": ("css/group_form.css",)
+        }  # <-- caminho relativo ao STATICFILES_DIRS
