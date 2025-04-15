@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
+from django.contrib.auth.admin import GroupAdmin
+from .forms import GroupChangeForm
 
 
 # Filtro: Ativo
@@ -60,6 +62,16 @@ class CustomUserAdmin(DefaultUserAdmin):
         GrupoFilter,
     )
 
+
+class CustomGroupAdmin(GroupAdmin):
+    form = GroupChangeForm
+    list_display = ("name",)
+    search_fields = ("name",)
+    ordering = ("name",)
+
+
+admin.site.unregister(Group)
+admin.site.register(Group, CustomGroupAdmin)
 
 # Re-registra o admin
 admin.site.unregister(User)
