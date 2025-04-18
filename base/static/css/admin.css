@@ -14,3 +14,7 @@
 .ck.ck-powered-by {
   display: none !important;
 }
+
+.btn {
+  border-radius: 5px;
+}
