@@ -208,7 +208,7 @@ JAZZMIN_SETTINGS = {
     # Ocultar esses modelos ao gerar o menu lateral (ex: auth.user)
     "hide_models": [],
     # Lista de aplicativos (e/ou modelos) para basear a ordenação do menu lateral (não precisa conter todos os aplicativos/modelos)
-    "order_with_respect_to": ["auth", "books", "books.author", "books.book"],
+    # "order_with_respect_to": ["auth", "books", "books.author", "books.book"],
     # Links personalizados para anexar a grupos de aplicativos, com chave no nome do aplicativo
     "custom_links": {
         "books": [
@@ -263,8 +263,7 @@ JAZZMIN_SETTINGS = {
         "auth.group": "vertical_tabs",
     },
     # Adicionar um dropdown de idioma no admin
-    # "language_chooser": True,
-    # "show_ui_builder": True,
+    # "language_chooser": True, 
     "language": "pt-br",
 }
 
