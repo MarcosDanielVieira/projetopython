@@ -25,7 +25,7 @@
           <div class="row">
             <div class="col-md-6">
               <label>Permissões disponíveis</label>
-              <ul id="permissions_from" class="connected-sortable list-group" style="min-height: 200px;">
+              <ul id="permissions_from" class="connected-sortable list-group">
                 {% for perm in adminform.form.permissions.field.queryset %}
                   {% if perm.pk not in adminform.form.permissions.value %}
                     <li class="list-group-item" data-id="{{ perm.pk }}">{{ perm.name }}</li>
@@ -36,7 +36,7 @@
 
             <div class="col-md-6">
               <label>Permissões escolhidas</label>
-              <ul id="permissions_to" class="connected-sortable list-group" style="min-height: 200px;">
+              <ul id="permissions_to" class="connected-sortable list-group">
                 {% for perm in adminform.form.permissions.field.queryset %}
                   {% if perm.pk in adminform.form.permissions.value %}
                     <li class="list-group-item" data-id="{{ perm.pk }}">{{ perm.name }}</li>
@@ -83,22 +83,5 @@
     });
   });
 </script>
-
-<style>
-  .connected-sortable {
-    border: 1px solid #ddd;
-    padding: 10px;
-    min-height: 200px;
-  }
-  .connected-sortable .list-group-item {
-    cursor: move;
-  }
-  .ui-state-highlight {
-    height: 2em;
-    line-height: 1.2em;
-    background-color: #f0f0f0;
-    border: dashed 1px #aaa;
-  }
-</style>
 
 {% endblock %}
