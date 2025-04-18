@@ -1,0 +1,10 @@
+fieldset.module.aligned {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+fieldset.module.aligned .form-row {
+  width: 48%;
+  min-width: 300px;
+}

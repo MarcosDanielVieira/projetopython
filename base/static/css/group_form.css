@@ -1,0 +1,21 @@
+  .connected-sortable {
+    border: 1px solid #ddd;
+    padding: 10px;
+    min-height: 200px;
+  }
+
+  .connected-sortable .list-group-item {
+    cursor: move;
+  }
+
+  .ui-state-highlight {
+    height: 2em;
+    line-height: 1.2em;
+    background-color: #f0f0f0;
+    border: dashed 1px #aaa;
+  }
+
+  .list-group {
+    height: 300px;
+    overflow-y: scroll;
+  }

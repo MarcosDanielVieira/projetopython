@@ -1,0 +1,87 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h3>Modificar Grupo</h3>
+    </div>
+    <div class="card-body">
+
+      <form method="post" action="">
+        {% csrf_token %}
+        {{ adminform.form.non_field_errors }}
+
+        <!-- Nome do grupo -->
+        <div class="form-group">
+          <label for="id_name">Nome <span class="text-danger">*</span></label>
+          {{ adminform.form.name.errors }}
+          {{ adminform.form.name }}
+        </div>
+
+        <!-- Permissões -->
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Permissões disponíveis</label>
+              <ul id="permissions_from" class="connected-sortable list-group">
+                {% for perm in adminform.form.permissions.field.queryset %}
+                  {% if perm.pk not in adminform.form.permissions.value %}
+                    <li class="list-group-item" data-id="{{ perm.pk }}">{{ perm.name }}</li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+
+            <div class="col-md-6">
+              <label>Permissões escolhidas</label>
+              <ul id="permissions_to" class="connected-sortable list-group">
+                {% for perm in adminform.form.permissions.field.queryset %}
+                  {% if perm.pk in adminform.form.permissions.value %}
+                    <li class="list-group-item" data-id="{{ perm.pk }}">{{ perm.name }}</li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Campo escondido -->
+        <input type="hidden" name="permissions" id="selected_permissions">
+
+        <!-- Botão de envio -->
+        <div class="form-group mt-4">
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
+<script>
+  var $j = jQuery.noConflict();
+ 
+  $j(function () {
+    $j(".connected-sortable").sortable({
+      connectWith: ".connected-sortable",
+      placeholder: "ui-state-highlight"
+    }).disableSelection();
+
+    $j("form").submit(function () {
+      let selected = [];
+      $j("#permissions_to li").each(function () {
+        selected.push($j(this).data("id"));
+      });
+      $j("#selected_permissions").val(selected.join(","));
+    });
+  });
+</script>
+
+{% endblock %}
