@@ -5,7 +5,11 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 
 
 class GroupChangeForm(forms.ModelForm):
-    name = forms.CharField(label="Nome do Grupo", max_length=150)
+    name = forms.CharField(
+        label="Nome do Grupo", 
+        max_length=150,
+        widget=forms.TextInput(attrs={'placeholder': 'Digite o nome do grupo'})
+    )
     permissions = forms.ModelMultipleChoiceField(
         queryset=Permission.objects.all(),
         widget=forms.CheckboxSelectMultiple,
