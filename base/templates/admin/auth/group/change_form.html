@@ -45,10 +45,7 @@
               </ul>
             </div>
           </div>
-        </div>
-
-        <!-- Campo escondido -->
-        <input type="hidden" name="permissions" id="selected_permissions">
+        </div> 
 
         <!-- Botão de envio -->
         <div class="form-group mt-4">
@@ -77,9 +74,10 @@
     $j("form").submit(function () {
       let selected = [];
       $j("#permissions_to li").each(function () {
+        let id = $j(this).data("id");
+        $j("<input>").attr({type: "hidden", name: "permissions",value: id }).appendTo("form");
         selected.push($j(this).data("id"));
-      });
-      $j("#selected_permissions").val(selected.join(","));
+      }); 
     });
   });
 </script>
