@@ -21,31 +21,33 @@
         </div>
 
         <!-- Permissões -->
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-6">
-              <label>Permissões disponíveis</label>
-              <ul id="permissions_from" class="connected-sortable list-group">
-                {% for perm in adminform.form.permissions.field.queryset %}
-                  {% if perm.pk not in adminform.form.permissions.value %}
-                    <li class="list-group-item" data-id="{{ perm.pk }}">{{ perm.name }}</li>
-                  {% endif %}
-                {% endfor %}
-              </ul>
-            </div>
+        {% with selected_permissions=adminform.form.permissions.value|default:'' %}
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Permissões disponíveis</label>
+                <ul id="permissions_from" class="connected-sortable list-group">
+                  {% for perm in adminform.form.permissions.field.queryset %}
+                    {% if not selected_permissions or perm.pk not in selected_permissions %}
+                      <li class="list-group-item" data-id="{{ perm.pk }}">{{ perm.name }}</li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
 
-            <div class="col-md-6">
-              <label>Permissões escolhidas</label>
-              <ul id="permissions_to" class="connected-sortable list-group">
-                {% for perm in adminform.form.permissions.field.queryset %}
-                  {% if perm.pk in adminform.form.permissions.value %}
-                    <li class="list-group-item" data-id="{{ perm.pk }}">{{ perm.name }}</li>
-                  {% endif %}
-                {% endfor %}
-              </ul>
+              <div class="col-md-6">
+                <label>Permissões escolhidas</label>
+                <ul id="permissions_to" class="connected-sortable list-group">
+                  {% for perm in adminform.form.permissions.field.queryset %}
+                    {% if selected_permissions and perm.pk in selected_permissions %}
+                      <li class="list-group-item" data-id="{{ perm.pk }}">{{ perm.name }}</li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
             </div>
           </div>
-        </div> 
+        {% endwith %}
 
         <!-- Botão de envio -->
         <div class="form-group mt-4">
