@@ -1,5 +1,6 @@
 {% extends "admin/change_form.html" %}
 {% load static %}
+{% load admin_urls admin_modify %}
 
 {% block content %}
 <div class="container mt-4">
@@ -21,39 +22,52 @@
         </div>
 
         <!-- Permissões -->
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-6">
-              <label>Permissões disponíveis</label>
-              <ul id="permissions_from" class="connected-sortable list-group">
-                {% for perm in adminform.form.permissions.field.queryset %}
-                  {% if perm.pk not in adminform.form.permissions.value %}
-                    <li class="list-group-item" data-id="{{ perm.pk }}">{{ perm.name }}</li>
-                  {% endif %}
-                {% endfor %}
-              </ul>
-            </div>
+        {% with selected_permissions=adminform.form.permissions.value|default:'' %}
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Permissões disponíveis</label>
+                <input type="text" class="form-control mb-2" id="search_permissions_from" placeholder="Filtrar disponíveis">
+                <ul id="permissions_from" class="connected-sortable list-group">
+                  {% for perm in adminform.form.permissions.field.queryset %}
+                    {% if not selected_permissions or perm.pk not in selected_permissions %}
+                      <li class="list-group-item" data-id="{{ perm.pk }}">{{ perm.name }}</li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
 
-            <div class="col-md-6">
-              <label>Permissões escolhidas</label>
-              <ul id="permissions_to" class="connected-sortable list-group">
-                {% for perm in adminform.form.permissions.field.queryset %}
-                  {% if perm.pk in adminform.form.permissions.value %}
-                    <li class="list-group-item" data-id="{{ perm.pk }}">{{ perm.name }}</li>
-                  {% endif %}
-                {% endfor %}
-              </ul>
+              <div class="col-md-6">
+                <label>Permissões escolhidas</label>
+                <input type="text" class="form-control mb-2" id="search_permissions_to" placeholder="Filtrar escolhidas">
+                <ul id="permissions_to" class="connected-sortable list-group">
+                  {% for perm in adminform.form.permissions.field.queryset %}
+                    {% if selected_permissions and perm.pk in selected_permissions %}
+                      <li class="list-group-item" data-id="{{ perm.pk }}">{{ perm.name }}</li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
+        {% endwith %}
+        
 
-        <!-- Campo escondido -->
-        <input type="hidden" name="permissions" id="selected_permissions">
-
-        <!-- Botão de envio -->
-        <div class="form-group mt-4">
-          <button type="submit" class="btn btn-primary">Salvar</button>
+        <!-- Botões padrão do Django admin -->
+        <div class="d-flex justify-content-between">
+          <div class="form-group">
+              <input type="submit" value="Salvar" class="btn btn-success" name="_save">
+          </div>
+          
+          <div class="form-group">
+              <input type="submit" class="btn btn-info" value="Salvar e adicionar outro(a)" name="_addanother">
+          </div>
+          
+          <div class="form-group">
+              <input type="submit" class="btn btn-info" value="Salvar e continuar editando" name="_continue">
+          </div>
         </div>
+        
       </form>
 
     </div>
@@ -67,19 +81,37 @@
 
 <script>
   var $j = jQuery.noConflict();
- 
+
   $j(function () {
+    // Sortable
     $j(".connected-sortable").sortable({
       connectWith: ".connected-sortable",
       placeholder: "ui-state-highlight"
     }).disableSelection();
 
-    $j("form").submit(function () {
-      let selected = [];
-      $j("#permissions_to li").each(function () {
-        selected.push($j(this).data("id"));
+    // Filtro de permissões
+    function filtrarPermissoes(inputId, listId) {
+      $j(inputId).on("keyup", function () {
+        var filtro = $j(this).val().toLowerCase();
+        $j(listId + " li").filter(function () {
+          $j(this).toggle($j(this).text().toLowerCase().indexOf(filtro) > -1);
+        });
       });
-      $j("#selected_permissions").val(selected.join(","));
+    }
+
+    filtrarPermissoes("#search_permissions_from", "#permissions_from");
+    filtrarPermissoes("#search_permissions_to", "#permissions_to");
+
+    // Ao submeter, cria os inputs hidden com as permissões escolhidas
+    $j("form").submit(function () {
+      $j("#permissions_to li").each(function () {
+        let id = $j(this).data("id");
+        $j("<input>").attr({
+          type: "hidden",
+          name: "permissions",
+          value: id
+        }).appendTo("form");
+      });
     });
   });
 </script>
