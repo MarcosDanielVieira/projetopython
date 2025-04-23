@@ -74,3 +74,4 @@
 - django-admin --version
 - python --version
 - python manage.py collectstatic (Rode collectstatic no ambiente de produção (caso for subir))
+- python manage.py popular_dados (Roda os dados faker de popular_dados.py)
