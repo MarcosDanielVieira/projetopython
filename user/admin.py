@@ -61,7 +61,8 @@ class CustomUserAdmin(DefaultUserAdmin):
         MembrosEquipeFilter,
         GrupoFilter,
     )
-
+    list_per_page = 20 # Listando 20 itens por página
+    list_max_show_all = 200 # Só mostra tudo se tiver mais de 200
 
 class CustomGroupAdmin(GroupAdmin):
     form = GroupChangeForm

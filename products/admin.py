@@ -1,7 +1,6 @@
 # Importa o módulo admin do Django para customizar a interface administrativa
 from django.contrib import admin
 from django.http import HttpResponse
-from django.utils.html import format_html
 
 # Importa os modelos e formulários usados no admin
 from .models import Brand, Category, Product, ProductImage
@@ -55,7 +54,8 @@ class BrandFilter(admin.SimpleListFilter):
 # Admin da tabela Brand
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
-    list_display = ("name", "is_active", "description", "created_at", "updated_at")
+    list_display = ("name", "is_active", "description",
+                    "created_at", "updated_at")
     search_fields = ("name",)  # Campo de busca
     list_filter = (ActiveFilter,)  # Filtro lateral
 
@@ -63,7 +63,8 @@ class BrandAdmin(admin.ModelAdmin):
 # Admin da tabela Category
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("name", "is_active", "description", "created_at", "updated_at")
+    list_display = ("name", "is_active", "description",
+                    "created_at", "updated_at")
     search_fields = ("name",)
     list_filter = (ActiveFilter,)
 
@@ -83,7 +84,8 @@ def disable_product(self, request, queryset):
 # Admin da tabela Product (produto)
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    inlines = [ProductImageInline]  # Permite adicionar imagens no mesmo formulário
+    # Permite adicionar imagens no mesmo formulário
+    inlines = [ProductImageInline]
     form = ProductForm  # Formulário customizado para produtos
 
     # Organização dos campos do formulário em seções
