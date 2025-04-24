@@ -58,18 +58,24 @@ class BrandAdmin(admin.ModelAdmin):
                     "created_at", "updated_at")
     search_fields = ("name",)  # Campo de busca
     list_filter = (ActiveFilter,)  # Filtro lateral
-
+    list_per_page = 20  # Listando 20 itens por página
+    list_max_show_all = 100  # Só mostra tudo se tiver mais de 100
 
 # Admin da tabela Category
+
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name", "is_active", "description",
                     "created_at", "updated_at")
     search_fields = ("name",)
     list_filter = (ActiveFilter,)
+    list_per_page = 20  # Listando 20 itens por página
+    list_max_show_all = 100  # Só mostra tudo se tiver mais de 100
 
 
 # Ação personalizada para ativar produtos em massa
+
 @admin.action(description="Ativar produtos selecionados")
 def activate_product(self, request, queryset):
     queryset.update(is_active=True)
@@ -87,6 +93,8 @@ class ProductAdmin(admin.ModelAdmin):
     # Permite adicionar imagens no mesmo formulário
     inlines = [ProductImageInline]
     form = ProductForm  # Formulário customizado para produtos
+    list_per_page = 20  # Listando 20 itens por página
+    list_max_show_all = 100  # Só mostra tudo se tiver mais de 100
 
     # Organização dos campos do formulário em seções
     fieldsets = (
