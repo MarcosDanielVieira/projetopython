@@ -6,7 +6,7 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 
 class GroupChangeForm(forms.ModelForm):
     name = forms.CharField(
-        label="Nome do Grupo", 
+        label="Nome do Grupo",
         max_length=150,
         widget=forms.TextInput(attrs={'placeholder': 'Digite o nome do grupo'})
     )
@@ -19,8 +19,9 @@ class GroupChangeForm(forms.ModelForm):
 
     class Meta:
         model = Group
+        # Campos que irão aparecer no formulário
         fields = ("name", "permissions")
-        widgets = {
+        widgets = {  # mudando o tipo do input
             "permissions": FilteredSelectMultiple("Permissões", is_stacked=False),
         }
 
