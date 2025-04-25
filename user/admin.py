@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
 from django.contrib.auth.admin import GroupAdmin
-from .forms import GroupChangeForm
+from .forms import GroupChangeForm, CustomUserChangeForm
 
 
 # Filtro: Ativo
@@ -56,6 +56,7 @@ class GrupoFilter(admin.SimpleListFilter):
 
 # Admin customizado do User
 class CustomUserAdmin(DefaultUserAdmin):
+    form = CustomUserChangeForm
     fieldsets = (
         (("Informações básicas"), {'fields': ('username', 'password')}),
         (("Informações pessoais"), {'fields': ('first_name', 'last_name', 'email')}),
