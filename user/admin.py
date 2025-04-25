@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
 from django.contrib.auth.admin import GroupAdmin
-from .forms import GroupChangeForm
+from .forms import GroupChangeForm, CustomUserChangeForm
 
 
 # Filtro: Ativo
@@ -56,13 +56,23 @@ class GrupoFilter(admin.SimpleListFilter):
 
 # Admin customizado do User
 class CustomUserAdmin(DefaultUserAdmin):
+    form = CustomUserChangeForm
+    fieldsets = (
+        (("Informações básicas"), {'fields': ('username', 'password')}),
+        (("Informações pessoais"), {'fields': ('first_name', 'last_name', 'email')}),
+        (("Permissões"), {
+            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
+        }),
+        (("Datas importantes"), {'fields': ('last_login', 'date_joined')}),
+    )
     list_filter = (
         AtivoFilter,
         MembrosEquipeFilter,
         GrupoFilter,
     )
-    list_per_page = 20 # Listando 20 itens por página
-    list_max_show_all = 200 # Só mostra tudo se tiver mais de 200
+    list_per_page = 20  # Listando 20 itens por página
+    list_max_show_all = 100  # Só mostra tudo se tiver mais de 200
+
 
 class CustomGroupAdmin(GroupAdmin):
     form = GroupChangeForm
