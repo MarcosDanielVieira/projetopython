@@ -56,6 +56,14 @@ class GrupoFilter(admin.SimpleListFilter):
 
 # Admin customizado do User
 class CustomUserAdmin(DefaultUserAdmin):
+    fieldsets = (
+        (("Informações básicas"), {'fields': ('username', 'password')}),
+        (("Informações pessoais"), {'fields': ('first_name', 'last_name', 'email')}),
+        (("Permissões"), {
+            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
+        }),
+        (("Datas importantes"), {'fields': ('last_login', 'date_joined')}),
+    )
     list_filter = (
         AtivoFilter,
         MembrosEquipeFilter,
