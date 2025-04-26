@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load form_filters %}
+{% block title %}
+  Login {{ project_name }}
+{% endblock %}
+{% block content %}
+  <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+
+  <div class="p-4">
+    <div class="row">
+      <div class="col-md-9 bg-primary rounded mb-3"></div>
+
+      <div class="col-md-3 mb-3">
+        <div class="card">
+          <div class="card-header text-center p-4">
+            <img class="logoLogin" src="{% static 'img/logoPreta.png' %}" alt="Logo" />
+            <h2 class="tituloLogin mt-3">Faça seu login</h2>
+          </div>
+
+          <div class="m-4 divSocialMidia">
+            <h6 class="heading">Continuar com:</h6>
+
+            <div class="d-flex justify-content-center mt-2 mb-2 d-grid gap-2">
+              <button type="button" class="btn btn-outline-primary">Facebook</button>
+
+              <button type="button" class="btn btn-outline-danger">Google</button>
+            </div>
+          </div>
+
+          <div class="item-divisor px-4">
+            <div class="linha-divisor"></div>
+            <p class="texto-divisor">ou</p>
+            <div class="linha-divisor"></div>
+          </div>
+
+          <div class="formLogin p-4">
+            <form method="post" novalidate>
+              {% csrf_token %}
+
+              <div>
+                <label for="{{ form.username.id_for_label }}">E-mail</label>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                  {{ form.username|add_class:'form-control'|add_placeholder:'Digite seu e-mail' }}
+                </div>
+              </div>
+
+              <div>
+                <label for="{{ form.password.id_for_label }}">Senha</label>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                  {{ form.password|add_class:'form-control'|add_placeholder:'Digite sua senha' }}
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <div class="remember">
+                  <input type="checkbox" name="remember" id="remember" />
+                  <label for="remember">Lembre-me</label>
+                </div>
+
+                <div class="forgotPassword">
+                  <a href="#" class="bt-esqueci">Esqueci minha senha</a>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary mt-4 w-100">Entrar</button>
+            </form>
+
+            <div class="pt-3 d-flex justify-content-center">
+              Ainda não tem conta? <a href="#" class="link"><span class="text-span p-3">Cadastre-se</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
