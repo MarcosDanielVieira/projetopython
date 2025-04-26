@@ -58,8 +58,8 @@ class GrupoFilter(admin.SimpleListFilter):
 class CustomUserAdmin(DefaultUserAdmin):
     form = CustomUserChangeForm
     fieldsets = (
-        (("Informações básicas"), {'fields': ('username', 'password')}),
-        (("Informações pessoais"), {'fields': ('first_name', 'last_name', 'email')}),
+        (("Informações de login"), {'fields': ('username', 'password','email')}),
+        (("Informações pessoais"), {'fields': ('first_name', 'last_name', )}),
         (("Permissões"), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),
