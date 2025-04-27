@@ -1,3 +1,4 @@
+# settings.py
 """
 Django settings for app project.
 
@@ -26,11 +27,12 @@ SECRET_KEY = "django-insecure-+#hs9rrdp2*qepgaw!!rb$o1____h8)lcd_yy5&a#%fd+y%@&_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 
 INSTALLED_APPS = [
+    "social_django",
     "jazzmin",
     "django_ckeditor_5",
     "django.contrib.admin",
@@ -44,6 +46,22 @@ INSTALLED_APPS = [
     "user",
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',  # backend do Google
+    'django.contrib.auth.backends.ModelBackend', # backend padrão
+)
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = '/admin/'  # para onde o usuário será redirecionado depois de logar
+LOGOUT_REDIRECT_URL = '/admin/'
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/admin/'
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = False
+SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/complete/google/'
+SOCIAL_AUTH_LOGOUT_REDIRECT_URL = '/' # Para redirecionamento após logout
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -53,6 +71,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = "app.urls"
@@ -69,6 +88,8 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 'app.context_processors.project_name',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
