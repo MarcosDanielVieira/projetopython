@@ -51,10 +51,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend', # backend padrão
 )
 
-# Chaves do Google
-# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
-
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = '/admin/'  # para onde o usuário será redirecionado depois de logar
