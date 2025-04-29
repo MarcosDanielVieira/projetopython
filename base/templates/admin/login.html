@@ -35,6 +35,14 @@
             <div class="linha-divisor"></div>
           </div>
 
+          {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+              <div class="px-4 mt-4">
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+              </div>
+            {% endfor %}
+          {% endif %}
+
           <div class="formLogin p-4">
             <form method="post" novalidate>
               {% csrf_token %}
@@ -56,9 +64,12 @@
               </div>
 
               <div class="d-flex justify-content-end">
-                <div class="forgotPassword">
-                  <a href="#" class="bt-esqueci">Esqueci minha senha</a>
-                </div>
+                {% url 'admin_password_reset' as password_reset_url %}
+                {% if password_reset_url %}
+                  <div class="password-reset-link">
+                    <a href="{{ password_reset_url }}" class="bt-esqueci">Esqueceu suas credenciais de login?</a>
+                  </div>
+                {% endif %}
               </div>
 
               <button type="submit" class="btn btn-primary mt-4 w-100">Entrar</button>
