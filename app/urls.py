@@ -7,7 +7,8 @@ from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.mysite, name='mysite'),
+    # path('', views.mysite, name='mysite'),
+    path('', views.home, name='home'),
     path('ckeditor5/', include('django_ckeditor_5.urls')),
     path('auth/', include('social_django.urls', namespace='social')),
 ]

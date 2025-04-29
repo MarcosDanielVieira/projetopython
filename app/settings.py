@@ -56,11 +56,23 @@ LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = '/admin/'  # para onde o usuário será redirecionado depois de logar
 LOGOUT_REDIRECT_URL = '/admin/'
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/admin/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'admin'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = 'admin'
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = False
 SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/complete/google/'
 SOCIAL_AUTH_LOGOUT_REDIRECT_URL = '/' # Para redirecionamento após logout
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user', 
+    'social_core.pipeline.user.create_user',
+    'app.pipeline.set_staff_status', 
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
