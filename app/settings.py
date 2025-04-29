@@ -17,7 +17,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -48,6 +47,7 @@ INSTALLED_APPS = [
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',  # backend do Google
+    'social_core.backends.facebook.FacebookOAuth2', # backend do Facebook
     'django.contrib.auth.backends.ModelBackend', # backend padrão
 )
 
@@ -61,6 +61,14 @@ SOCIAL_AUTH_NEW_USER_REDIRECT_URL = 'admin'
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = False
 SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/complete/google/'
 SOCIAL_AUTH_LOGOUT_REDIRECT_URL = '/' # Para redirecionamento após logout
+
+# Chaves da API do Facebook
+# SOCIAL_AUTH_FACEBOOK_KEY = 'id_facebook'
+# SOCIAL_AUTH_FACEBOOK_SECRET = 'secret_facebook'
+
+# Chaves da API do Google
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'CLIENT_ID'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'CLIENT_SECRET'
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
