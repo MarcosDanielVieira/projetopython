@@ -74,4 +74,10 @@
 - django-admin --version
 - python --version
 - python manage.py collectstatic (Rode collectstatic no ambiente de produção (caso for subir))
-- python manage.py popular_dados (Roda os dados faker de popular_dados.py)
+- python manage.py popular_dados (Roda os dados faker de popular_dados.py)´
+
+- pip freeze > requirements.txt (guarda os pacotes instalados do venv)
+- pip install -r .\requirements.txt (instala tudo que foi guardado)
+
+# Template de referencia
+- https://adminlte.io/themes/v3/index.html
