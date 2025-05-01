@@ -50,6 +50,19 @@ class BrandFilter(admin.SimpleListFilter):
             return queryset.filter(brand__id=self.value())
         return queryset
 
+class CategoryFilter(admin.SimpleListFilter):
+    title = "Categoria"
+    parameter_name = "category"
+    template = "filter.html"
+
+    def lookups(self, request, model_admin):
+        categories = Category.objects.all()
+        return [(str(cat.id), cat.name) for cat in categories]
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(category__id=self.value())
+        return queryset
 
 # Admin da tabela Brand
 @admin.register(Brand)
@@ -128,7 +141,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ("title", "brand__name", "category__name")
 
     # Filtros laterais
-    list_filter = (ActiveFilter, BrandFilter, "category")
+    list_filter = (ActiveFilter, BrandFilter, CategoryFilter)
 
     # Usa autocomplete para seleção de marca e categoria
     autocomplete_fields = ["brand", "category"]
