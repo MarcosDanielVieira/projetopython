@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
 from django.contrib.auth.admin import GroupAdmin
-from .forms import GroupChangeForm, CustomUserChangeForm
+from .forms import GroupChangeForm, CustomUserChangeForm, CustomUserCreationForm
 
 
 # Filtro: Ativo
@@ -79,6 +79,19 @@ class CustomGroupAdmin(GroupAdmin):
     list_display = ("name",)
     search_fields = ("name",)
     ordering = ("name",)
+    
+class CustomUserAdmin(DefaultUserAdmin):
+    add_form = CustomUserCreationForm
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'first_name', 'last_name', 'email', 'password1', 'password2'),
+        }),
+    )
+
+# Desregistra o admin padrão e registra o personalizado
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
 
 
 admin.site.unregister(Group)
