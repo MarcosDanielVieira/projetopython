@@ -78,3 +78,6 @@
 
 - pip freeze > requirements.txt (guarda os pacotes instalados do venv)
 - pip install -r .\requirements.txt (instala tudo que foi guardado)
+
+# Template de referencia
+- https://adminlte.io/themes/v3/index.html
