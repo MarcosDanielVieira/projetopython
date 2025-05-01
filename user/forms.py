@@ -90,7 +90,7 @@ class CustomUserCreationForm(UserCreationForm):
         # Customiza os campos herdados do UserCreationForm
         self.fields['username'].widget.attrs.update({
             'placeholder': 'Nome de usuário',
-            'class': 'form-control'
+            'class': 'form-control',
         })
         self.fields['password1'].widget.attrs.update({
             'placeholder': 'Senha',
