@@ -233,7 +233,7 @@ JAZZMIN_SETTINGS = {
         # model admin para linkar (Permissões verificadas no modelo)
         # {"model": "auth.User"},
         # App com menu dropdown para todas as suas páginas de modelos (Permissões verificadas nos modelos)
-        {"app": "books"},
+        # {"app": "products"},
     ],
     #############
     # Menu do Usuário #
@@ -261,16 +261,16 @@ JAZZMIN_SETTINGS = {
     # Lista de aplicativos (e/ou modelos) para basear a ordenação do menu lateral (não precisa conter todos os aplicativos/modelos)
     # "order_with_respect_to": ["auth", "books", "books.author", "books.book"],
     # Links personalizados para anexar a grupos de aplicativos, com chave no nome do aplicativo
-    "custom_links": {
-        "books": [
-            {
-                "name": "Criar Mensagens",
-                "url": "make_messages",
-                "icon": "fas fa-comments",
-                "permissions": ["books.view_book"],
-            }
-        ]
-    },
+    # "custom_links": {
+    #     "books": [
+    #         {
+    #             "name": "Criar Mensagens",
+    #             "url": "make_messages",
+    #             "icon": "fas fa-comments",
+    #             "permissions": ["books.view_book"],
+    #         }
+    #     ]
+    # },
     # Ícones personalizados para aplicativos/modelos do menu lateral (https://fontawesome.com/search?o=r&ic=free&s=solid)
     "icons": {
         "auth": "fas fa-users-cog",
@@ -310,7 +310,7 @@ JAZZMIN_SETTINGS = {
     "changeform_format": "horizontal_tabs",
     # substituir formulários de alteração por modeladmin
     "changeform_format_overrides": {
-        "auth.user": "collapsible",
+        "auth.user": "horizontal_tabs",
         "auth.group": "vertical_tabs",
     },
     # Adicionar um dropdown de idioma no admin
