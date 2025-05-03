@@ -72,7 +72,7 @@ class CustomUserAdmin(DefaultUserAdmin):
     )
     list_per_page = 20  # Listando 20 itens por página
     list_max_show_all = 100  # Só mostra tudo se tiver mais de 200
-
+    
 
 class CustomGroupAdmin(GroupAdmin):
     form = GroupChangeForm
@@ -88,6 +88,34 @@ class CustomUserAdmin(DefaultUserAdmin):
             'fields': ('username', 'first_name', 'last_name', 'email', 'password1', 'password2'),
         }),
     )
+    
+     # Sobrescreve a view de listagem para adicionar o placeholder dinâmico
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+
+        # Mapeia campos de busca para nomes mais amigáveis
+        field_map = {
+            "username": "Usuário",
+            "first_name": "primeiro nome", 
+            "email":"e-mail"
+        }
+
+        # Cria uma lista de nomes legíveis com base em search_fields
+        search_labels = [
+            field_map.get(field, field.replace("__", " de "))
+            for field in self.search_fields
+            if field != 'last_name' 
+        ]
+
+        # Monta a string final do placeholder
+        placeholder = f"{', '.join(search_labels)}"
+
+        # Envia o placeholder para o template
+        extra_context["custom_search_placeholder"] = placeholder
+
+        # Chama a view padrão com o contexto extra
+        return super().changelist_view(request, extra_context=extra_context)
+
 
 # Desregistra o admin padrão e registra o personalizado
 admin.site.unregister(User)
