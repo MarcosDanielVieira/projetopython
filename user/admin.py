@@ -38,7 +38,76 @@ class MembrosEquipeFilter(admin.SimpleListFilter):
             return queryset.filter(is_staff=False)
         return queryset
 
+# Filtro: Super usuário
 
+class SuperUserFilter(admin.SimpleListFilter):
+    title = "Superusuário"
+    parameter_name = "is_superuser"
+    template = "filter.html"  # mesmo template customizado
+
+    def lookups(self, request, model_admin):
+        return [
+            ("1", "Sim"),
+            ("0", "Não"),
+        ]
+
+    def queryset(self, request, queryset):
+        if self.value() == "1":
+            return queryset.filter(is_superuser=True)
+        elif self.value() == "0":
+            return queryset.filter(is_superuser=False)
+        return queryset
+    
+class IsActiveFilter(admin.SimpleListFilter):
+    title = "Ativo"
+    parameter_name = "is_active"
+    template = "filter.html"  # mesmo template customizado
+
+    def lookups(self, request, model_admin):
+        return [
+            ("1", "Sim"),
+            ("0", "Não"),
+        ]
+
+    def queryset(self, request, queryset):
+        if self.value() == "1":
+            return queryset.filter(is_active=True)
+        elif self.value() == "0":
+            return queryset.filter(is_active=False)
+        return queryset
+    
+class GroupFilter(admin.SimpleListFilter):
+    title = "Grupo"
+    parameter_name = "group"
+    template = "filter.html"  # usa o template customizado
+
+    def lookups(self, request, model_admin):
+        groups = Group.objects.all()
+        return [(str(group.id), group.name) for group in groups]
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(groups__id=self.value())
+        return queryset
+    
+class IsStaffFilter(admin.SimpleListFilter):
+    title = "Membro da equipe"
+    parameter_name = "is_staff"
+    template = "filter.html"  # mesmo template usado para Brand
+
+    def lookups(self, request, model_admin):
+        return [
+            ("1", "Sim"),
+            ("0", "Não"),
+        ]
+
+    def queryset(self, request, queryset):
+        if self.value() == "1":
+            return queryset.filter(is_staff=True)
+        elif self.value() == "0":
+            return queryset.filter(is_staff=False)
+        return queryset
+    
 # Filtro: Grupos
 class GrupoFilter(admin.SimpleListFilter):
     title = "Grupo"
@@ -82,6 +151,7 @@ class CustomGroupAdmin(GroupAdmin):
     
 class CustomUserAdmin(DefaultUserAdmin):
     add_form = CustomUserCreationForm
+    list_filter =(IsStaffFilter,SuperUserFilter,IsActiveFilter, GroupFilter)
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
@@ -121,10 +191,8 @@ class CustomUserAdmin(DefaultUserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 
-
 admin.site.unregister(Group)
 admin.site.register(Group, CustomGroupAdmin)
-
-# Re-registra o admin
+ 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
