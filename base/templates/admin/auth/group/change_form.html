@@ -6,7 +6,7 @@
   <div class="container-fluid mt-4">
     <div class="card">
       <div class="card-header">
-        <h3>{{ title }}</h3>
+        <h4 class="card-title">{{ title }}</h4>
       </div>
       <div class="card-body">
         <form method="post" action="">
@@ -24,7 +24,7 @@
           {% with selected_permissions=adminform.form.permissions.value|default:'' %}
             <div class="form-group">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3">
                   <label>Permissões disponíveis</label>
                   <input type="text" class="form-control mb-2" id="search_permissions_from" placeholder="Filtrar disponíveis" />
                   <ul id="permissions_from" class="connected-sortable list-group">
@@ -36,7 +36,7 @@
                   </ul>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3">
                   <label>Permissões escolhidas</label>
                   <input type="text" class="form-control mb-2" id="search_permissions_to" placeholder="Filtrar escolhidas" />
                   <ul id="permissions_to" class="connected-sortable list-group">
@@ -53,17 +53,15 @@
 
           <!-- Botões padrão do Django admin -->
           <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mt-3">
-            <div class="form-group">
-              <input type="submit" value="Salvar" class="btn btn-success mb-3" name="_save" />
-            </div>
+            <input type="submit" value="Salvar" class="btn btn-success mb-3" name="_save" />
 
-            <div class="form-group">
-              <input type="submit" class="btn btn-info mb-3" value="Salvar e adicionar outro(a)" name="_addanother" />
-            </div>
+            <input type="submit" class="btn btn-info mb-3" value="Salvar e adicionar outro(a)" name="_addanother" />
 
-            <div class="form-group">
-              <input type="submit" class="btn btn-info mb-3" value="Salvar e continuar editando" name="_continue" />
-            </div>
+            <input type="submit" class="btn btn-info mb-3" value="Salvar e continuar editando" name="_continue" />
+
+            {% if original %}
+              <a class="btn btn-secondary mb-3" href="{% url opts|admin_urlname:'history' original.pk %}">Histórico</a>
+            {% endif %}
           </div>
         </form>
       </div>
@@ -71,9 +69,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" />
-  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+  <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}" />
+  <script src="{% static 'js/jquery-ui.min.js' %}"></script>
 
   <script>
     var $j = jQuery.noConflict()

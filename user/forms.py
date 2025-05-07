@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth.models import Group, Permission,User
 from django.contrib.admin.widgets import FilteredSelectMultiple
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 class GroupChangeForm(forms.ModelForm):
     name = forms.CharField(
@@ -102,7 +102,7 @@ class CustomUserCreationForm(UserCreationForm):
         })
 
 
-class CustomUserChangeForm(forms.ModelForm):
+class CustomUserChangeForm(UserChangeForm):
     first_name = forms.CharField(
         label='Primeiro nome',
         max_length=30,
@@ -128,7 +128,14 @@ class CustomUserChangeForm(forms.ModelForm):
             'class': 'form-control'
         })
     )
-
+    
+    user_permissions = forms.ModelMultipleChoiceField(
+        queryset=Permission.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+        label="Permissões"
+    )
+    
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email')
@@ -140,3 +147,9 @@ class CustomUserChangeForm(forms.ModelForm):
             'placeholder': 'Nome de usuário',
             'class': 'form-control',
         })
+    
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exclude(username=self.instance.username).exists():
+            raise forms.ValidationError("Este e-mail já está sendo utilizado por outro usuário.")
+        return email

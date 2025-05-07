@@ -1,3 +1,9 @@
+# Hopen Data
+
+Este sistema utiliza partes do template AdminLTE (https://adminlte.io), licenciado sob a Licença MIT.
+Copyright (c) 2014-2024 Colorlib
+
+
 # MVT
 
 - Models (Arquivo responsável pelo banco de dados)
@@ -78,6 +84,8 @@
 
 - pip freeze > requirements.txt (guarda os pacotes instalados do venv)
 - pip install -r .\requirements.txt (instala tudo que foi guardado)
+- python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+  - geração de SECRET_KEY, não colocar "aspas duplas"
 
 # Template de referencia
 - https://adminlte.io/themes/v3/index.html

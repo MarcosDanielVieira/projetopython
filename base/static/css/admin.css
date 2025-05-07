@@ -18,3 +18,23 @@
 .btn {
   border-radius: 5px;
 }
+
+#changelist-filter .filter-title {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+#changelist-filter .filter select {
+  display: block;
+  margin-top: 4px;
+}
+
+.btn-secondary,
+.btn-secondary:hover {
+  background-color: #5C636A;
+}
+
+.userBlock .tab-pane {
+  overflow-x: hidden;
+}

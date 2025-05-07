@@ -1,34 +1,40 @@
-{% extends "admin/change_list.html" %}
+{% extends 'admin/change_list.html' %}
 
 {% block search %}
   {{ block.super }}
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const input = document.querySelector('#changelist-search input[name="q"]');
+    document.addEventListener('DOMContentLoaded', function () {
+      const input = document.querySelector('#changelist-search input[name="q"]')
       if (input) {
-        input.setAttribute('id', 'searchbar');
-        input.setAttribute('placeholder', '{{ custom_search_placeholder|escapejs }}');
-        input.classList.add('form-control');
-
-        const formGroup = input.closest('.form-group');
+        input.setAttribute('id', 'searchbar')
+        input.setAttribute('placeholder', '{{ custom_search_placeholder|escapejs }}')
+        input.classList.add('form-control')
+    
+        const formGroup = input.closest('.form-group')
         if (formGroup) {
-          const customWrapper = document.createElement('div');
-          customWrapper.className = 'filter-wrapper';
-
-          const label = document.createElement('label');
-          label.setAttribute('for', 'searchbar');
-          label.innerHTML  = 'Pesquise por <small>({{ custom_search_placeholder|escapejs }})</small> ';
-          label.style.display = 'block';
-
-          customWrapper.appendChild(label);
-          customWrapper.appendChild(input);
-
-          formGroup.parentNode.replaceChild(customWrapper, formGroup);
+          const customWrapper = document.createElement('div')
+          customWrapper.className = 'filter-wrapper'
+    
+          const label = document.createElement('label')
+          label.setAttribute('for', 'searchbar')
+    
+          // Verifica se custom_search_placeholder não está vazio
+          const placeholderText = '{{ custom_search_placeholder|escapejs }}'
+          if (placeholderText.trim()) {
+            label.innerHTML = `Pesquise por <small>(${placeholderText})</small>`
+          } else {
+            label.innerHTML = 'Pesquise por'
+          }
+    
+          label.style.display = 'block'
+    
+          customWrapper.appendChild(label)
+          customWrapper.appendChild(input)
+    
+          formGroup.parentNode.replaceChild(customWrapper, formGroup)
         }
       }
-    });
+    })
   </script>
 {% endblock %}
-
-

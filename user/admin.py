@@ -1,3 +1,5 @@
+# user\admin.py
+from social_django.models import Association, Nonce, UserSocialAuth, Code
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin, GroupAdmin
@@ -66,6 +68,11 @@ class CustomGroupAdmin(GroupAdmin):
     list_display = ("name",)
     search_fields = ("name",)
     ordering = ("name",)
+    
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        extra_context["custom_search_placeholder"] = "Nome do grupo"
+        return super().changelist_view(request, extra_context=extra_context)
 
 # ========================
 # REGISTRO FINAL
@@ -76,3 +83,11 @@ admin.site.register(User, CustomUserAdmin)
 
 admin.site.unregister(Group)
 admin.site.register(Group, CustomGroupAdmin)
+
+
+# Ocultar os modelos do admin
+for model in [Association, Nonce, UserSocialAuth, Code]:
+    try:
+        admin.site.unregister(model)
+    except admin.sites.NotRegistered:
+        pass

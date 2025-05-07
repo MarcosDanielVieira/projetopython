@@ -1,0 +1,70 @@
+<div class="row">
+  <!-- Campo: Usuário -->
+  <div class="col-md-6">
+    <label class="form-label" for="{{ adminform.form.username.id_for_label }}">{{ adminform.form.username.label }} <span class="text-danger">*</span></label>
+    {{ adminform.form.username }}
+    {% if adminform.form.username.help_text %}
+      <small class="form-text text-muted">{{ adminform.form.username.help_text|safe }}</small>
+    {% endif %}
+    {% if adminform.form.username.errors %}
+      <div class="text-danger">{{ adminform.form.username.errors }}</div>
+    {% endif %}
+  </div>
+
+  <!-- Campo: E-mail -->
+  <div class="col-md-6">
+    <label class="form-label" for="{{ adminform.form.email.id_for_label }}">{{ adminform.form.email.label }} <span class="text-danger">*</span></label>
+    {{ adminform.form.email }}
+    {% if adminform.form.email.help_text %}
+      <small class="form-text text-muted">{{ adminform.form.email.help_text|safe }}</small>
+    {% endif %}
+    {% if adminform.form.email.errors %}
+      <div class="text-danger">{{ adminform.form.email.errors }}</div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="row mt-3">
+  <!-- Campo: Primeiro nome -->
+  <div class="col-md-6">
+    <label class="form-label" for="{{ adminform.form.first_name.id_for_label }}">{{ adminform.form.first_name.label }} <span class="text-danger">*</span></label>
+    {{ adminform.form.first_name }}
+    {% if adminform.form.first_name.help_text %}
+      <small class="form-text text-muted">{{ adminform.form.first_name.help_text|safe }}</small>
+    {% endif %}
+    {% if adminform.form.first_name.errors %}
+      <div class="text-danger">{{ adminform.form.first_name.errors }}</div>
+    {% endif %}
+  </div>
+
+  <!-- Campo: Sobrenome -->
+  <div class="col-md-6">
+    <label class="form-label" for="{{ adminform.form.last_name.id_for_label }}">{{ adminform.form.last_name.label }} <span class="text-danger">*</span></label>
+    {{ adminform.form.last_name }}
+    {% if adminform.form.last_name.help_text %}
+      <small class="form-text text-muted">{{ adminform.form.last_name.help_text|safe }}</small>
+    {% endif %}
+    {% if adminform.form.last_name.errors %}
+      <div class="text-danger">{{ adminform.form.last_name.errors }}</div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="row mt-3">
+  <!-- Campo: Senha -->
+  <div class="col-md-12">
+    <div class="form-group">
+      <label class="form-label fw-semibold" for="{{ adminform.form.password.id_for_label }}">{{ adminform.form.password.label }}</label>
+
+      <div class="p-3 bg-light border rounded encryptedPassword">{{ adminform.form.password }}</div>
+
+      {% if adminform.form.password.help_text %}
+        <small class="form-text text-muted mt-1 d-block">{{ adminform.form.password.help_text|safe }}</small>
+      {% endif %}
+
+      {% if adminform.form.password.errors %}
+        <div class="text-danger mt-1">{{ adminform.form.password.errors }}</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
