@@ -100,3 +100,43 @@ class CustomUserCreationForm(UserCreationForm):
             'placeholder': 'Confirme a senha',
             'class': 'form-control'
         })
+
+
+class CustomUserChangeForm(forms.ModelForm):
+    first_name = forms.CharField(
+        label='Primeiro nome',
+        max_length=30,
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Digite o primeiro nome',
+            'class': 'form-control'
+        })
+    )
+
+    last_name = forms.CharField(
+        label='Último nome',
+        max_length=30,
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Digite o sobrenome',
+            'class': 'form-control'
+        })
+    )
+
+    email = forms.EmailField(
+        label='E-mail',
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'exemplo@email.com',
+            'class': 'form-control'
+        })
+    )
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['username'].widget.attrs.update({
+            'placeholder': 'Nome de usuário',
+            'class': 'form-control',
+        })

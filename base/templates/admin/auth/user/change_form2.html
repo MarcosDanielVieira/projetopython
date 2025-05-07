@@ -66,41 +66,17 @@
             </div>
           </div>
 
-          <div class="row mt-3">
-            <div class="col-md-6">
-              <label class="form-label" for="{{ adminform.form.password1.id_for_label }}">{{ adminform.form.password1.label }} <span class="text-danger">*</span></label>
-              {{ adminform.form.password1 }}
-
-              {% if adminform.form.password1.help_text %}
-                <small class="form-text text-muted">{{ adminform.form.password1.help_text|safe }}</small>
-              {% endif %}
-
-              {% if adminform.form.password1.errors %}
-                <div class="text-danger">{{ adminform.form.password1.errors }}</div>
-              {% endif %}
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label" for="{{ adminform.form.password2.id_for_label }}">{{ adminform.form.password2.label }} <span class="text-danger">*</span></label>
-              {{ adminform.form.password2 }}
-
-              {% if adminform.form.password2.help_text %}
-                <small class="form-text text-muted">{{ adminform.form.password2.help_text|safe }}</small>
-              {% endif %}
-
-              {% if adminform.form.password2.errors %}
-                <div class="text-danger">{{ adminform.form.password2.errors }}</div>
-              {% endif %}
-            </div>
-          </div>
-
           <!-- Botões padrão do Django admin -->
           <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mt-3">
             <input type="submit" value="Salvar" class="btn btn-success mb-3" name="_save" />
 
+            <a href="{% url 'admin:auth_user_delete' user.id %}" class="btn btn-danger mb-3">Remover</a>
+
             <input type="submit" class="btn btn-info mb-3" value="Salvar e adicionar outro(a)" name="_addanother" />
 
             <input type="submit" class="btn btn-info mb-3" value="Salvar e continuar editando" name="_continue" />
+
+            <a class="btn btn-secondary mb-3" href="{% url 'admin:auth_user_history' user.id %}">Histórico</a>
           </div>
         </form>
       </div>
