@@ -1,10 +1,10 @@
 {% load i18n admin_list %}
 <div class="filter-wrapper">
-  <label for="{{ parameter_name }}">{{ title }}</label>
-  <select name="{{ parameter_name }}" class="form-control search-filter">
-    <option value=""></option>
+  <label for="{{ spec.parameter_name }}">{{ spec.title }}</label>
+  <select data-name="{{ spec.parameter_name }}" class="form-control search-filter" id="{{ spec.parameter_name }}">
+    <option value="">{% trans "Todos" %}</option>
     {% for choice in choices %}
-      <option value="{{ choice.query_string|iriencode }}" {% if choice.selected %}selected{% endif %}>
+      <option data-name="{{ spec.parameter_name }}" value="{{ choice.value|default_if_none:'' }}" {% if choice.selected %}selected{% endif %}>
         {{ choice.display }}
       </option>
     {% endfor %}
