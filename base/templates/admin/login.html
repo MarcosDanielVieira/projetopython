@@ -46,28 +46,25 @@
               {% csrf_token %}
 
               <div>
-                <label for="{{ form.username.id_for_label }}">E-mail ou usuário</label>
+                <label for="{{ form.username.id_for_label }}">E-mail ou usuário <span class="text-danger">*</span></label>
                 <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">@</span>
+                  <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
                   {{ form.username|add_class:'form-control'|add_placeholder:'Digite seu e-mail ou usuário' }}
                 </div>
               </div>
 
               <div>
-                <label for="{{ form.password.id_for_label }}">Senha</label>
+                <label for="{{ form.password.id_for_label }}">Senha <span class="text-danger">*</span></label>
                 <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon1">@</span>
+                  <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
                   {{ form.password|add_class:'form-control'|add_placeholder:'Digite sua senha' }}
                 </div>
               </div>
 
               <div class="d-flex justify-content-end">
-                {% url 'admin_password_reset' as password_reset_url %}
-                {% if password_reset_url %}
-                  <div class="password-reset-link">
-                    <a href="{{ password_reset_url }}" class="bt-esqueci">Esqueceu suas credenciais de login?</a>
-                  </div>
-                {% endif %}
+                <div class="password-reset-link">
+                  <a href="{% url 'password_reset' %}" class="bt-esqueci">Esqueceu suas credenciais de login?</a>
+                </div>
               </div>
 
               <button type="submit" class="btn btn-primary mt-4 w-100">Entrar</button>

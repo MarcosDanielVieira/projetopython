@@ -2,7 +2,8 @@
 from django import forms
 from django.contrib.auth.models import Group, Permission,User
 from django.contrib.admin.widgets import FilteredSelectMultiple
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordResetForm
+from django.contrib.auth.models import User
 
 class GroupChangeForm(forms.ModelForm):
     name = forms.CharField(
@@ -59,7 +60,8 @@ class CustomUserCreationForm(UserCreationForm):
         max_length=30,
         widget=forms.TextInput(attrs={
             'placeholder': 'Digite o primeiro nome',
-            'class': 'form-control'
+            'class': 'form-control',
+            'autocomplete': 'username'
         })
     )
 
@@ -76,7 +78,8 @@ class CustomUserCreationForm(UserCreationForm):
         label='E-mail',
         widget=forms.EmailInput(attrs={
             'placeholder': 'exemplo@email.com',
-            'class': 'form-control'
+            'class': 'form-control',
+            'autocomplete': 'username'
         })
     )
 
@@ -108,7 +111,8 @@ class CustomUserChangeForm(UserChangeForm):
         max_length=30,
         widget=forms.TextInput(attrs={
             'placeholder': 'Digite o primeiro nome',
-            'class': 'form-control'
+            'class': 'form-control',
+            'autocomplete': 'username'        
         })
     )
 
@@ -125,7 +129,8 @@ class CustomUserChangeForm(UserChangeForm):
         label='E-mail',
         widget=forms.EmailInput(attrs={
             'placeholder': 'exemplo@email.com',
-            'class': 'form-control'
+            'class': 'form-control',
+            'autocomplete': 'username'
         })
     )
     
@@ -153,3 +158,25 @@ class CustomUserChangeForm(UserChangeForm):
         if User.objects.filter(email=email).exclude(username=self.instance.username).exists():
             raise forms.ValidationError("Este e-mail já está sendo utilizado por outro usuário.")
         return email
+
+class CustomPasswordResetForm(PasswordResetForm):
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs) 
+        self.fields['email'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Digite seu e-mail',
+        })
+        
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+
+        # Busca usuários ativos com este e-mail
+        users = User.objects.filter(email=email, is_active=True)
+
+        if not users.exists():
+            raise forms.ValidationError("Este e-mail não está associado a um usuário ativo.")
+
+        return email
+
+    

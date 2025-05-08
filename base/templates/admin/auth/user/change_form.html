@@ -63,6 +63,10 @@
             </div>
 
             {% if original %}
+              <a href="{% url opts|admin_urlname:'delete' original.pk %}" class="btn btn-danger form-control mb-3">Excluir</a>
+            {% endif %}
+
+            {% if original %}
               <a class="btn btn-secondary btn-block" href="{% url opts|admin_urlname:'history' original.pk %}">Histórico</a>
             {% endif %}
           </div>
