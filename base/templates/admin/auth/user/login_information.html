@@ -27,7 +27,7 @@
 <div class="row mt-3">
   <!-- Campo: Primeiro nome -->
   <div class="col-md-6">
-    <label class="form-label" for="{{ adminform.form.first_name.id_for_label }}">{{ adminform.form.first_name.label }} <span class="text-danger">*</span></label>
+    <label class="form-label d-block" for="{{ adminform.form.first_name.id_for_label }}">{{ adminform.form.first_name.label }} <span class="text-danger">*</span></label>
     {{ adminform.form.first_name }}
     {% if adminform.form.first_name.help_text %}
       <small class="form-text text-muted">{{ adminform.form.first_name.help_text|safe }}</small>
@@ -46,6 +46,53 @@
     {% endif %}
     {% if adminform.form.last_name.errors %}
       <div class="text-danger">{{ adminform.form.last_name.errors }}</div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="row mt-3">
+  <!-- Campo: Superusuário -->
+  <div class="col-md-4">
+    <label class="form-label d-block" for="{{ adminform.form.is_superuser.id_for_label }}">{{ adminform.form.is_superuser.label }}</label>
+    <label class="switch">
+      {{ adminform.form.is_superuser }}
+      <span class="slider round"></span>
+    </label>
+    {% if adminform.form.is_superuser.help_text %}
+      <small class="form-text text-muted">{{ adminform.form.is_superuser.help_text|safe }}</small>
+    {% endif %}
+    {% if adminform.form.is_superuser.errors %}
+      <div class="text-danger">{{ adminform.form.is_superuser.errors }}</div>
+    {% endif %}
+  </div>
+
+  <!-- Campo: Membro da equipe -->
+  <div class="col-md-4">
+    <label class="form-label d-block" for="{{ adminform.form.is_staff.id_for_label }}">{{ adminform.form.is_staff.label }}</label>
+    <label class="switch">
+      {{ adminform.form.is_staff }}
+      <span class="slider round"></span>
+    </label>
+    {% if adminform.form.is_staff.help_text %}
+      <small class="form-text text-muted">{{ adminform.form.is_staff.help_text|safe }}</small>
+    {% endif %}
+    {% if adminform.form.is_staff.errors %}
+      <div class="text-danger">{{ adminform.form.is_staff.errors }}</div>
+    {% endif %}
+  </div>
+
+  <!-- Campo: Está ativo -->
+  <div class="col-md-4">
+    <label class="form-label d-block" for="{{ adminform.form.is_active.id_for_label }}">{{ adminform.form.is_active.label }}</label>
+    <label class="switch">
+      {{ adminform.form.is_active }}
+      <span class="slider round"></span>
+    </label>
+    {% if adminform.form.is_active.help_text %}
+      <small class="form-text text-muted">{{ adminform.form.is_active.help_text|safe }}</small>
+    {% endif %}
+    {% if adminform.form.is_active.errors %}
+      <div class="text-danger">{{ adminform.form.is_active.errors }}</div>
     {% endif %}
   </div>
 </div>

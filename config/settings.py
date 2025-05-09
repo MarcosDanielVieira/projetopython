@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
 from .jazzmin_settings import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS
+from .ckeditor_5 import CKEDITOR_5_CONFIGS
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -34,7 +35,6 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')  # 
 # Application definition
 
 INSTALLED_APPS = [
-    "base",
     "jazzmin",
     "django_ckeditor_5",
     'social_django',
@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user',
-    'plain'
+    'plain',
+    "base",
+    
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -78,8 +80,8 @@ MIDDLEWARE = [
 ]
 
 # Chaves da API do Google
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('GOOGLE_CLIENT_ID')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('GOOGLE_OAUTH2_SECRET')
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
@@ -121,21 +123,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.mysql'),
+        'NAME': os.getenv('DB_NAME', 'hopen'),
+        'USER': os.getenv('DB_USER', 'root'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'change-me'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': os.getenv('DB_ENGINE', 'change-me'),
-#         'NAME': os.getenv('POSTGRES_DB', 'change-me'),
-#         'USER': os.getenv('POSTGRES_USER', 'change-me'),
-#         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'change-me'),
-#         'HOST': os.getenv('POSTGRES_HOST', 'change-me'),
-#         'PORT': os.getenv('POSTGRES_PORT', 'change-me'),
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -186,6 +181,10 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "base", "static"),
+]
+
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
@@ -195,24 +194,6 @@ PROJECT_NAME = " - Hopen data" #os.path.basename(BASE_DIR)
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CKEDITOR_5_CONFIGS = {
-    "default": {
-        "toolbar": [
-            "heading",
-            "|",
-            "bold",
-            "italic",
-            "link",
-            "bulletedList",
-            "numberedList",
-            "|",
-            "undo",
-            "redo",
-        ],
-        "language": "pt-br",
-    }
-}
 
 # LOGGING = {
 #     'version': 1,

@@ -15,12 +15,12 @@
       <div class="col-md-3 mb-3">
         <div class="card">
           <div class="card-header text-center p-4">
-            <img class="logoLogin" src="{% static 'img/logoPreta.png' %}" alt="Logo" />
+            <img width="200" src="{% static 'img/logoPreta.png' %}" alt="Logo" />
             <h2 class="tituloLogin mt-3">Faça seu login</h2>
           </div>
 
           <div class="m-4 divSocialMidia">
-            <h6 class="heading">Continuar com:</h6>
+            <h6 class="heading text-center">Continuar com:</h6>
 
             <div class="d-flex justify-content-center mt-2 mb-2 d-grid gap-2">
               <a type="button" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}" class="btn btn-outline-danger">Google</a>
