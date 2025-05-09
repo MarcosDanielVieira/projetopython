@@ -12,7 +12,7 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1307,3 +1307,9 @@ msgstr "Remova as permissões selecionando-as e depois clique no botão de seta 
 
 msgid "First, enter a username and password. Then, you'll be able to edit more user options."
 msgstr "Primeiro, insira um nome de usuário e uma senha. Depois, você poderá editar mais opções de usuário."
+
+msgid "Account"
+msgstr "Conta"
+
+msgid "See Profile"
+msgstr "Ver Perfil"
